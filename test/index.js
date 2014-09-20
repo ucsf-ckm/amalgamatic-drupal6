@@ -26,45 +26,35 @@ describe('exports', function () {
 		});
 	});
 
-	// it('returns results if a non-ridiculous search term is provided', function (done) {
-	// 	nock('http://ucsfcat.library.ucsf.edu')
-	// 		.get('/search/X?SEARCH=medicine&SORT=D')
-	// 		.reply('200', '<span class="briefcitTitle"><a href="#">Medicine</a></span><span class="briefcitTitle"><a class="Results" href="#">Medicine</a></span>');
+	it('returns results if a non-ridiculous search term is provided', function (done) {
+		nock('http://www.library.ucsf.edu')
+			.get('/search/node/medicine')
+			.reply('200', '<dl class="search-results node-results"><dt class="title"><a href="http://example.com/1">Medicine 1</a></dt><dt class="title"><a href="http://example.com/2">Medicine 2</a></dt></dl>');
 
-	// 	drupal6.search('medicine', function (result) {
-	// 		expect(result.data.length).to.equal(2);
-	// 		done();
-	// 	});
-	// });
+		drupal6.search('medicine', function (result) {
+			expect(result.data.length).to.equal(2);
+			done();
+		});
+	});
 
-	// it('returns an empty result if ridiculous search term is provided', function (done) {
-	// 	nock('http://ucsfcat.library.ucsf.edu')
-	// 		.get('/search/X?SEARCH=fhqwhgads&SORT=D')
-	// 		.reply('200', '<html></html>');
+	it('returns an empty result if ridiculous search term is provided', function (done) {
+		nock('http://www.library.ucsf.edu')
+			.get('/search/node/fhqwhgads')
+			.reply('200', '<dl class="search-results node-results"></dl>');
 
-	// 	drupal6.search('fhqwhgads', function (result) {
-	// 		expect(result.data.length).to.equal(0);
-	// 		done();
-	// 	});
-	// });
+		drupal6.search('fhqwhgads', function (result) {
+			expect(result.data.length).to.equal(0);
+			done();
+		});
+	});
 
-	// it('returns a single result for insanely specific search', function (done) {
-	// 	nock('http://ucelinks.cdlib.org:8888')
-	// 		.get('/search/X?SEARCH=cardenas%20gano&SORT=D')
-	// 		.reply('200', '<div class="bibInfoData"><strong>El Pueblo Voto. ¡ Y Cardenas Gano! [electronic resource]</strong></div>');
-	// 	drupal6.search('cardenas gano', function (result) {
-	// 		expect(result.data.length).to.equal(1);
-	// 		done();
-	// 	});
-	// });
-
-	// it('returns an error object if there was an HTTP error', function (done) {
-	// 	nock.disableNetConnect();
-	// 	drupal6.search('medicine', function (result) {
-	// 		nock.enableNetConnect();
-	// 		expect(result.data).to.be.undefined;
-	// 		expect(result.error).to.equal('Nock: Not allow net connect for "ucsfcat.library.ucsf.edu:80"');
-	// 		done();
-	// 	});
-	// });
+	it('returns an error object if there was an HTTP error', function (done) {
+		nock.disableNetConnect();
+		drupal6.search('medicine', function (result) {
+			nock.enableNetConnect();
+			expect(result.data).to.be.undefined;
+			expect(result.error).to.equal('Nock: Not allow net connect for "www.library.ucsf.edu:80"');
+			done();
+		});
+	});
 });
