@@ -5,14 +5,14 @@ var http = require('http');
 exports.search = function (query, callback) {
     'use strict';
 
-    if (! query) {
+    if (! query || ! query.searchTerm) {
         callback({data: []});
         return;
     }
 
     var options = {
         host: 'www.library.ucsf.edu',
-        path: '/search/node/' + querystring.escape(query)
+        path: '/search/node/' + querystring.escape(query.searchTerm)
     };
 
     http.get(options, function (res) {
