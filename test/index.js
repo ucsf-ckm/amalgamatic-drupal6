@@ -20,14 +20,16 @@ describe('exports', function () {
 	});
 
 	it('returns an empty result if no query object provided', function (done) {
-		drupal6.search(null, function (result) {
+		drupal6.search(null, function (err, result) {
+			expect(err).to.be.not.ok;
 			expect(result).to.deep.equal({data:[]});
 			done();
 		});
 	});
 
 	it('returns an empty result if no search term provided', function (done) {
-		drupal6.search({searchTerm: ''}, function (result) {
+		drupal6.search({searchTerm: ''}, function (err, result) {
+			expect(err).to.be.not.ok;
 			expect(result).to.deep.equal({data:[]});
 			done();
 		});
@@ -38,7 +40,8 @@ describe('exports', function () {
 			.get('/search/node/medicine')
 			.reply('200', '<dl class="search-results node-results"><dt class="title"><a href="http://example.com/1">Medicine 1</a></dt><dt class="title"><a href="http://example.com/2">Medicine 2</a></dt></dl>');
 
-		drupal6.search({searchTerm: 'medicine'}, function (result) {
+		drupal6.search({searchTerm: 'medicine'}, function (err, result) {
+			expect(err).to.be.not.ok;
 			expect(result.data.length).to.equal(2);
 			done();
 		});
@@ -49,7 +52,8 @@ describe('exports', function () {
 			.get('/search/node/fhqwhgads')
 			.reply('200', '<dl class="search-results node-results"></dl>');
 
-		drupal6.search({searchTerm: 'fhqwhgads'}, function (result) {
+		drupal6.search({searchTerm: 'fhqwhgads'}, function (err, result) {
+			expect(err).to.be.not.ok;
 			expect(result.data.length).to.equal(0);
 			done();
 		});
@@ -57,10 +61,10 @@ describe('exports', function () {
 
 	it('returns an error object if there was an HTTP error', function (done) {
 		nock.disableNetConnect();
-		drupal6.search({searchTerm: 'medicine'}, function (result) {
+		drupal6.search({searchTerm: 'medicine'}, function (err, result) {
 			nock.enableNetConnect();
-			expect(result.data).to.be.undefined;
-			expect(result.error).to.equal('Nock: Not allow net connect for "www.library.ucsf.edu:80"');
+			expect(result).to.be.not.ok;
+			expect(err.message).to.equal('Nock: Not allow net connect for "www.library.ucsf.edu:80"');
 			done();
 		});
 	});
