@@ -1,4 +1,3 @@
-var querystring = require('querystring');
 var cheerio = require('cheerio');
 var http = require('http');
 
@@ -12,7 +11,7 @@ exports.search = function (query, callback) {
 
     var options = {
         host: 'www.library.ucsf.edu',
-        path: '/search/node/' + querystring.escape(query.searchTerm)
+        path: '/search/node/' + encodeURIComponent(query.searchTerm)
     };
 
     http.get(options, function (res) {
