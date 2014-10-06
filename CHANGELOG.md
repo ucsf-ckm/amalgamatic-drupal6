@@ -1,3 +1,16 @@
+# 2014-10-06
+4 commits against 2 issues, over a day [`73e88a3`](https://github.com/ucsf-ckm/amalgamatic-drupal6/commit/73e88a3)⎆[`e5b55d5`](https://github.com/ucsf-ckm/amalgamatic-drupal6/commit/e5b55d5)
+
+## [**3.0.2**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues?milestone=4&state=open)
+- [**#9**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/9) add amalgamatic-plugin to keywords in package.json
+
+
+## Issues
+- [**#10**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/10) add keyword to package.json for #9
+
+---
+
+
 # 2014-10-05
 4 commits against 2 issues, over 9 days [`2014ddc`](https://github.com/ucsf-ckm/amalgamatic-drupal6/commit/2014ddc)⎆[`d089276`](https://github.com/ucsf-ckm/amalgamatic-drupal6/commit/d089276)
 
