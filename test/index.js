@@ -104,7 +104,7 @@ describe('exports', function () {
 			.get('/path/medicine')
 			.reply(200, '<dl class="search-results node-results"><dt class="title"><a href="http://example.com/path/result">Medicine</a></dt></dl>');
 
-		drupal6.setOptions({host: 'example.com', port: 8000, path: '/path'});
+		drupal6.setOptions({url: 'http://example.com:8000/path'});
 		drupal6.search({searchTerm: 'medicine'}, function (err, result) {
 			expect(err).to.be.not.ok;
 			expect(result.data).to.deep.equal([{name: 'Medicine', url: 'http://example.com/path/result'}]);
@@ -112,15 +112,15 @@ describe('exports', function () {
 		});
 	});
 
-	it('should accept hostname as an option', function (done) {
+	it('should return a link to all results', function (done) {
 		nock('http://example.com')
 			.get('/path/medicine')
 			.reply(200, '<dl class="search-results node-results"><dt class="title"><a href="http://example.com/path/result">Medicine</a></dt></dl>');
 
-		drupal6.setOptions({hostname: 'example.com', path: '/path'});
+		drupal6.setOptions({url: 'http://example.com/path'});
 		drupal6.search({searchTerm: 'medicine'}, function (err, result) {
 			expect(err).to.be.not.ok;
-			expect(result.data).to.deep.equal([{name: 'Medicine', url: 'http://example.com/path/result'}]);
+			expect(result.url).to.equal('http://example.com/path/medicine');
 			done();
 		});
 	});
