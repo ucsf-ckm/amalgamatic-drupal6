@@ -1,5 +1,18 @@
 var cheerio = require('cheerio');
 var http = require('http');
+var extend = require('util-extend');
+
+var options = {
+    host: 'www.library.ucsf.edu',
+    path: '/search/node'
+};
+
+exports.setOptions = function (newOptions) {
+    options = extend(options, newOptions);
+    if (newOptions.host) {
+        options.hostname = newOptions.host;
+    }
+};
 
 exports.search = function (query, callback) {
     'use strict';
@@ -9,12 +22,11 @@ exports.search = function (query, callback) {
         return;
     }
 
-    var options = {
-        host: 'www.library.ucsf.edu',
-        path: '/search/node/' + encodeURIComponent(query.searchTerm)
-    };
+    var myOptions = options;
 
-    http.get(options, function (res) {
+    myOptions.path = myOptions.path + '/' + encodeURIComponent(query.searchTerm);
+
+    http.get(myOptions, function (res) {
         var rawData = '';
 
         res.on('data', function (chunk) {
