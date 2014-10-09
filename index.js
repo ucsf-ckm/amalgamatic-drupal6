@@ -3,15 +3,11 @@ var http = require('http');
 var extend = require('util-extend');
 
 var options = {
-    host: 'www.library.ucsf.edu',
-    path: '/search/node'
+    url: 'http://www.library.ucsf.edu/search/node'
 };
 
 exports.setOptions = function (newOptions) {
     options = extend(options, newOptions);
-    if (newOptions.host) {
-        options.hostname = newOptions.host;
-    }
 };
 
 exports.search = function (query, callback) {
@@ -22,11 +18,9 @@ exports.search = function (query, callback) {
         return;
     }
 
-    var myOptions = options;
+    var myUrl = options.url + '/' + encodeURIComponent(query.searchTerm);
 
-    myOptions.path = myOptions.path + '/' + encodeURIComponent(query.searchTerm);
-
-    http.get(myOptions, function (res) {
+    http.get(myUrl, function (res) {
         var rawData = '';
 
         res.on('data', function (chunk) {
@@ -46,8 +40,10 @@ exports.search = function (query, callback) {
                 });
             });
             
-
-            callback(null, {data: result});
+            callback(null, {
+                data: result, 
+                url: myUrl
+            });
         });
     }).on('error', function (e) {
         callback(e);
