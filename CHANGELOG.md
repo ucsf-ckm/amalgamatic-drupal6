@@ -1,4 +1,7 @@
 
+## [**4.0.0**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues?milestone=6&state=closed)
+- [**#12**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/12) &quot;All Results&quot; link
+
 ## [**3.1.0**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues?milestone=5&state=closed)
 - [**#11**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/11) add setOption() for #3
 - [**#3**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/3) enable configuration options
