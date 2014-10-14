@@ -1,6 +1,7 @@
 var cheerio = require('cheerio');
 var http = require('http');
 var extend = require('util-extend');
+var url = require('url');
 
 var options = {
     url: 'http://www.library.ucsf.edu/search/node'
@@ -20,7 +21,10 @@ exports.search = function (query, callback) {
 
     var myUrl = options.url + '/' + encodeURIComponent(query.searchTerm);
 
-    http.get(myUrl, function (res) {
+    var myOptions = url.parse(myUrl);
+    myOptions.withCredentials = false;
+
+    http.get(myOptions, function (res) {
         var rawData = '';
 
         res.on('data', function (chunk) {
