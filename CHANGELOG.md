@@ -1,4 +1,7 @@
 
+## [**4.0.1**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues?milestone=7&state=closed)
+- [**#14**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/14) withCredentials default to false
+
 ## [**4.0.0**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues?milestone=6&state=closed)
 - [**#12**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/12) &quot;All Results&quot; link
 
