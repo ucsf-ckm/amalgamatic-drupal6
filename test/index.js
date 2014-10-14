@@ -17,6 +17,8 @@ var before = lab.before;
 var beforeEach = lab.beforeEach;
 var afterEach = lab.afterEach;
 
+var revert;
+
 describe('exports', function () {
 
 	var originalOptions = {};
@@ -46,6 +48,10 @@ describe('exports', function () {
 
 	afterEach(function (done) {
 		nock.cleanAll();
+		if (revert) {
+			revert();
+			revert = null;
+		}
 		done();
 	});
 
@@ -123,5 +129,15 @@ describe('exports', function () {
 			expect(result.url).to.equal('http://example.com/path/medicine');
 			done();
 		});
+	});
+
+	it('should set withCredentials to false for browserify', function (done) {
+		revert = drupal6.__set__({http: {get: function (options) {
+			expect(options.withCredentials).to.be.false;
+			done();
+			return {on: function () {}};
+		}}});
+
+		drupal6.search({searchTerm: 'medicine'});
 	});
 });
