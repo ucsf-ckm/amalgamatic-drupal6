@@ -1,4 +1,8 @@
 
+## [**4.0.2**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues?milestone=8&state=closed)
+- [**#1**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/1) Document API
+- [**#6**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/6) Travis-CI
+
 ## [**4.0.1**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues?milestone=7&state=closed)
 - [**#14**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/14) withCredentials default to false
 
