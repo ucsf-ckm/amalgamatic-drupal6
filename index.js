@@ -1,10 +1,10 @@
 var cheerio = require('cheerio');
-var http = require('http');
+var https = require('https');
 var extend = require('util-extend');
 var url = require('url');
 
 var options = {
-    url: 'http://www.library.ucsf.edu/search/node'
+    url: 'https://www.library.ucsf.edu/search/node'
 };
 
 exports.setOptions = function (newOptions) {
@@ -24,7 +24,7 @@ exports.search = function (query, callback) {
     var myOptions = url.parse(myUrl);
     myOptions.withCredentials = false;
 
-    http.get(myOptions, function (res) {
+    https.get(myOptions, function (res) {
         var rawData = '';
 
         res.on('data', function (chunk) {

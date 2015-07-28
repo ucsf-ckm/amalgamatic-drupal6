@@ -9,7 +9,9 @@ var nock = require('nock');
 var Lab = require('lab');
 var lab = exports.lab = Lab.script();
 
-var expect = Lab.expect;
+var Code = require('code');
+
+var expect = Code.expect;
 var describe = lab.experiment;
 var it = lab.test;
 
@@ -72,7 +74,7 @@ describe('exports', function () {
 	});
 
 	it('returns results if a non-ridiculous search term is provided', function (done) {
-		nock('http://www.library.ucsf.edu')
+		nock('https://www.library.ucsf.edu')
 			.get('/search/node/medicine')
 			.reply(200, '<dl class="search-results node-results"><dt class="title"><a href="http://example.com/1">Medicine 1</a></dt><dt class="title"><a href="http://example.com/2">Medicine 2</a></dt></dl>');
 
@@ -84,7 +86,7 @@ describe('exports', function () {
 	});
 
 	it('returns an empty result if ridiculous search term is provided', function (done) {
-		nock('http://www.library.ucsf.edu')
+		nock('https://www.library.ucsf.edu')
 			.get('/search/node/fhqwhgads')
 			.reply(200, '<dl class="search-results node-results"></dl>');
 
@@ -100,17 +102,17 @@ describe('exports', function () {
 		drupal6.search({searchTerm: 'medicine'}, function (err, result) {
 			nock.enableNetConnect();
 			expect(result).to.be.not.ok;
-			expect(err.message).to.equal('Nock: Not allow net connect for "www.library.ucsf.edu:80"');
+			expect(err.message).to.equal('Nock: Not allow net connect for "www.library.ucsf.edu:443"');
 			done();
 		});
 	});
 
 	it('should use host,port, and path options if they are passed', function (done) {
-		nock('http://example.com:8000')
+		nock('https://example.com:8000')
 			.get('/path/medicine')
 			.reply(200, '<dl class="search-results node-results"><dt class="title"><a href="http://example.com/path/result">Medicine</a></dt></dl>');
 
-		drupal6.setOptions({url: 'http://example.com:8000/path'});
+		drupal6.setOptions({url: 'https://example.com:8000/path'});
 		drupal6.search({searchTerm: 'medicine'}, function (err, result) {
 			expect(err).to.be.not.ok;
 			expect(result.data).to.deep.equal([{name: 'Medicine', url: 'http://example.com/path/result'}]);
@@ -119,20 +121,20 @@ describe('exports', function () {
 	});
 
 	it('should return a link to all results', function (done) {
-		nock('http://example.com')
+		nock('https://example.com')
 			.get('/path/medicine')
 			.reply(200, '<dl class="search-results node-results"><dt class="title"><a href="http://example.com/path/result">Medicine</a></dt></dl>');
 
-		drupal6.setOptions({url: 'http://example.com/path'});
+		drupal6.setOptions({url: 'https://example.com/path'});
 		drupal6.search({searchTerm: 'medicine'}, function (err, result) {
 			expect(err).to.be.not.ok;
-			expect(result.url).to.equal('http://example.com/path/medicine');
+			expect(result.url).to.equal('https://example.com/path/medicine');
 			done();
 		});
 	});
 
 	it('should set withCredentials to false for browserify', function (done) {
-		revert = drupal6.__set__({http: {get: function (options) {
+		revert = drupal6.__set__({https: {get: function (options) {
 			expect(options.withCredentials).to.be.false;
 			done();
 			return {on: function () {}};

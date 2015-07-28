@@ -18,7 +18,7 @@ var amalgamatic = require('amalgamatic'),
     drupal6 = require('amalgamatic-drupal6');
 
 // Set the URL to point to your Drupal 6 search page
-drupal6.setOptions({url: 'http://www.library.ucsf.edu/search/node'});
+drupal6.setOptions({url: 'https://www.library.ucsf.edu/search/node'});
 
 // Add this plugin to your Amalgamatic instance along with any other plugins you've configured.
 amalgamatic.add('drupal6', drupal6);
