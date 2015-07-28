@@ -1,3 +1,5 @@
+## [**4.0.3**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues?milestone=9&q=is%3Aclosed)
+- [**19**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/19) https only
 
 ## [**4.0.2**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues?milestone=8&state=closed)
 - [**#1**](https://github.com/ucsf-ckm/amalgamatic-drupal6/issues/1) Document API
