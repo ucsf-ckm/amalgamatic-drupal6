@@ -14,7 +14,7 @@
     "test": "node_modules/lab/bin/lab -t 100"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": ">=4.2.6"
   },
   "devDependencies": {
     "code": "^1.4.1",
@@ -26,5 +26,6 @@
   },
   "keywords": [
     "amalgamatic-plugin"
-  ]
+  ],
+  "license": "MIT"
 }
